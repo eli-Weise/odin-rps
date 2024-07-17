@@ -17,25 +17,11 @@ function getComputerChoice(){
   return choice;
 }
 
-function getHumanChoice(){
-  let input;
-
-  while (true){
-    input = (prompt("Choose your hand (rock, paper, scissors)")).toLowerCase();
-
-    if (input == "rock" ||  input == "paper" || input == "scissors"){
-      break;
-    } else {
-      console.log("try again");
-    }
-  }
-
-  return input;
-}
-
+//initialize scores
 let humanScore = 0;
 let computerScore = 0;
 
+//game logic and increments scores
 function playRound(humanChoice, computerChoice){
   let endStr;
 
@@ -74,13 +60,16 @@ function playRound(humanChoice, computerChoice){
   return endStr;
 }
 
+//select html elements
 const play = document.querySelector("#play");
 const result = document.querySelector("#result");
 const score = document.querySelector("#score");
 
+//event listener for the human game choices
+//utilizes event delegation
 play.addEventListener("click", (event) => {
   
-
+  //game only availabe while scores are low enough
   if (humanScore < 5 && computerScore < 5){
     const target = event.target;
 
@@ -98,28 +87,20 @@ play.addEventListener("click", (event) => {
     score.textContent = humanScore + " - " + computerScore;
 
   }
+  //end of game message
   if (humanScore == 5){
     score.textContent = "You win! Final score is: " + humanScore + " - " + computerScore;
-    play.removeEventListener("click")
   } else if (computerScore == 5){
     score.textContent = "You lose! Final score is: " + humanScore + " - " + computerScore;
 }
 });
 
-// function playGame(){
-//   for (let i = 0; i < 5; i++){
-//     console.log(playRound(getHumanChoice(), getComputerChoice()));
-//     console.log("Human score: " + humanScore + ", Computer score: " + computerScore);
-//   }
+//"reset" button selector and logic
+const reset = document.querySelector("#reset");
 
-//   if (humanScore > computerScore){
-//     console.log("You Won!");
-//   } else if (humanScore < computerScore) {
-//     console.log("You Lost :(");
-//   } else {
-//     console.log("Tie");
-//   }
-// }
-
-
-// playGame();
+reset.addEventListener("click", (event) => {
+  humanScore = 0;
+  computerScore = 0;
+  result.textContent = "";
+  score.textContent = "0 - 0";
+})
