@@ -76,21 +76,34 @@ function playRound(humanChoice, computerChoice){
 
 const play = document.querySelector("#play");
 const result = document.querySelector("#result");
+const score = document.querySelector("#score");
 
 play.addEventListener("click", (event) => {
-  const target = event.target;
+  
 
-  switch(target.id) {
-    case "rock":
-      result.textContent = playRound("rock", getComputerChoice());
-      break;
-    case "paper":
-      result.textContent = playRound("paper", getComputerChoice());
-      break;
-    case "scissors":
-      result.textContent = playRound("scissors", getComputerChoice());
-      break;
+  if (humanScore < 5 && computerScore < 5){
+    const target = event.target;
+
+    switch(target.id) {
+      case "rock":
+        result.textContent = playRound("rock", getComputerChoice());
+        break;
+      case "paper":
+        result.textContent = playRound("paper", getComputerChoice());
+        break;
+      case "scissors":
+        result.textContent = playRound("scissors", getComputerChoice());
+        break;
+    }
+    score.textContent = humanScore + " - " + computerScore;
+
   }
+  if (humanScore == 5){
+    score.textContent = "You win! Final score is: " + humanScore + " - " + computerScore;
+    play.removeEventListener("click")
+  } else if (computerScore == 5){
+    score.textContent = "You lose! Final score is: " + humanScore + " - " + computerScore;
+}
 });
 
 // function playGame(){
