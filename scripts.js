@@ -74,18 +74,39 @@ function playRound(humanChoice, computerChoice){
   return endStr;
 }
 
-function playGame(){
-  for (let i = 0; i < 5; i++){
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
-    console.log("Human score: " + humanScore + ", Computer score: " + computerScore);
+const play = document.querySelector("#play");
+const result = document.querySelector("#result");
+
+play.addEventListener("click", (event) => {
+  const target = event.target;
+
+  switch(target.id) {
+    case "rock":
+      result.textContent = playRound("rock", getComputerChoice());
+      break;
+    case "paper":
+      result.textContent = playRound("paper", getComputerChoice());
+      break;
+    case "scissors":
+      result.textContent = playRound("scissors", getComputerChoice());
+      break;
   }
+});
 
-  if (humanScore > computerScore){
-    console.log("You Won!");
-  } else {
-    console.log("You Lost :(");
-  }
-}
+// function playGame(){
+//   for (let i = 0; i < 5; i++){
+//     console.log(playRound(getHumanChoice(), getComputerChoice()));
+//     console.log("Human score: " + humanScore + ", Computer score: " + computerScore);
+//   }
+
+//   if (humanScore > computerScore){
+//     console.log("You Won!");
+//   } else if (humanScore < computerScore) {
+//     console.log("You Lost :(");
+//   } else {
+//     console.log("Tie");
+//   }
+// }
 
 
-playGame();
+// playGame();
